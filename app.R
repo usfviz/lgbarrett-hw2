@@ -13,7 +13,6 @@ if (!require("ggvis")) {
 }
 
 
-
 regions <- c("Latin America & Caribbean", "South Asia",  "Sub-Saharan Africa", "Europe & Central Asia", "Middle East & North Africa",
              "East Asia & Pacific", "North America")
 
@@ -67,8 +66,7 @@ server <- function(input, output) {
                "<b>Life Expectancy:</b> ", as.character(round(data$le_interp, 2)), "<br>",
                "<b>Fertility Rate:</b> ", as.character(round(data$fr_interp, 2)))
       }, "hover") %>%
-      hide_legend("size") %>% 
-      # hide_legend("fill") %>% 
+      hide_legend("size") %>%
       set_options(height = 600, width = 900)
     })
     vis %>% bind_shiny("plot", "plot_ui")
