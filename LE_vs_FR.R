@@ -1,10 +1,13 @@
 rm(list = ls())
 cat('\014')
 
-library(tidyr)
-library(dplyr)
+if (!require("tidyr")) {
+  install.packages("tidyr", repos = "http://cran.us.r-project.org")
+}
 
-# setwd("/Users/lawrencebarrett/Documents/School/msan622/Homework/Homework2/")
+if (!require("dplyr")) {
+  install.packages("dplyr", repos = "http://cran.us.r-project.org")
+}
 
 life_expectancy <- read.csv("Data/API_SP.DYN.LE00.IN_DS2_en_csv_v2.csv",
                            header = TRUE, stringsAsFactors = FALSE, skip = 4, check.names = FALSE)
@@ -44,12 +47,12 @@ population <-gather(population, key = "year", value = "population", 3:57)
 country_data <- inner_join(inner_join(fertility_rate, life_expectancy, by = c("Country Name", "Country Code", "year")),
                           population, by = c("Country Name", "Country Code", "year"))
 
-na_count <- country_data %>% 
-  group_by(`Country Name`) %>% 
-  arrange(year) %>% 
-  summarise(fr_non_na = sum(!is.na(fertility_rate)),
-            le_non_na = sum(!is.na(life_expectancy)),
-            pop_non_na = sum(!is.na(population)))
+# na_count <- country_data %>% 
+#   group_by(`Country Name`) %>% 
+#   arrange(year) %>% 
+#   summarise(fr_non_na = sum(!is.na(fertility_rate)),
+#             le_non_na = sum(!is.na(life_expectancy)),
+#             pop_non_na = sum(!is.na(population)))
 
 linear_interpolation <- function(data){
   missindx <- is.na(data)

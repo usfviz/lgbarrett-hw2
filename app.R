@@ -1,8 +1,17 @@
 source('LE_vs_FR.R')
 
-library(shiny)
-library(ggplot2)
-library(ggvis)
+if (!require("shiny")) {
+  install.packages("shiny", repos = "http://cran.us.r-project.org")
+}
+
+if (!require("ggplot2")) {
+  install.packages("ggplot2", repos = "http://cran.us.r-project.org")
+}
+
+if (!require("ggvis")) {
+  install.packages("ggvis", repos = "http://cran.us.r-project.org")
+}
+
 
 
 regions <- c("Latin America & Caribbean", "South Asia",  "Sub-Saharan Africa", "Europe & Central Asia", "Middle East & North Africa",
